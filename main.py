@@ -28,7 +28,7 @@ while True:
             data = auth_client.get_product_historic_rates(
                 ticker, granularity=60)
             now = datetime.now()
-            print(datetime.strftime(now, "%H:%M:%S") + " downloaded: " + ticker)
+            print(f"{datetime.strftime(now, '%H:%M:%S')}: {ticker} downloaded.")
             if not data:
                 continue
 
@@ -65,7 +65,7 @@ while True:
                 df.to_csv(full_path, index=False)
 
         except Exception:
-            print(datetime.strftime(now, "%H:%M:%S") + " downloaded: " + ticker)
+            print(f"{datetime.strftime(now, '%H:%M:%S')}: {ticker} failed!")
             pass
 
         sleep(0.5)

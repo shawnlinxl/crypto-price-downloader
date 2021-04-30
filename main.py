@@ -74,25 +74,3 @@ while True:
         sleep(0.5)
 
     sleep(30)
-
-
-# Fix US datetime to UTC
-for ticker in download_list:
-    simple_path = f"data/data_simple/{ticker}.csv"
-    if isfile(simple_path):
-        df_old = pd.read_csv(simple_path)
-        df_old["datetime"] = pd.to_datetime(df_old["datetime"])
-        df_old["modified"] = pd.to_datetime(df_old["modified"])
-        df_old["modified"] = df_old["modified"].dt.tz_localize(
-            'US/Eastern').dt.tz_convert("UTC")
-        df_old.to_csv(simple_path, index=False)
-
-    full_path = f"data/data_full/{ticker}.csv"
-
-    if isfile(full_path):
-        df_old = pd.read_csv(full_path)
-        df_old["datetime"] = pd.to_datetime(df_old["datetime"])
-        df_old["modified"] = pd.to_datetime(df_old["modified"])
-        df_old["modified"] = df_old["modified"].dt.tz_localize(
-            'US/Eastern').dt.tz_convert("UTC")
-        df_old.to_csv(full_path, index=False)
